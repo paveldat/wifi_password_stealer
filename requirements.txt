@@ -1,0 +1,6 @@
+configparser
+smtplib
+ssl
+subprocess
+collections
+opencv-python
