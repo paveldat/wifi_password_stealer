@@ -13,7 +13,9 @@
 + Works with Windows and Linux
 + Automatically detects what language Windows is in
 + Takes a photo
-+ Sends information to us by email
++ Sends WiFi name and passwords to us by email
++ Gets information about the computer, such as IP, MAC address, time, CPU information, and writes everything to a file
++ This file is attached to the message
 + Can add to any program and receive information
 
 ## How to setup
